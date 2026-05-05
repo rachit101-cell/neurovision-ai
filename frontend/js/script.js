@@ -2,7 +2,7 @@
 
 // Base URL for the Flask backend. If you change the backend host/port,
 // update this value, but keep the /predict/* routes unchanged.
-const API_BASE = "http://127.0.0.1:5000";
+const API_BASE = "https://neurovision-ai-mj40.onrender.com";
 
 // Transparent 1x1 so clearing img src doesn't show broken icon
 const EMPTY_IMG_SRC = "data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
