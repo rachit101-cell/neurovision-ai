@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroVision AI - Hospitals</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+</head>
+<body class="app-body">
+  <div class="background-glow"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">NV</div>
+      <div class="logo-text">
+        <span class="logo-title">NeuroVision AI</span>
+        <span class="logo-subtitle">Clinical Intelligence</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Dashboard
+      </a>
+      <a href="upload.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Upload Scan
+      </a>
+      <a href="dashboard.html#predictions" class="nav-item">
+        <span class="nav-dot"></span>
+        Predictions
+      </a>
+      <a href="doctors.html" class="nav-item active">
+        <span class="nav-dot"></span>
+        Hospitals
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <p class="sidebar-caption">Provider information is approximate. Confirm details with the facility.</p>
+    </div>
+  </aside>
+
+  <main class="main-layout">
+    <header class="topbar">
+      <div>
+        <h1 class="page-title">Hospitals</h1>
+        <p class="page-subtitle">
+          View nearby hospitals and clinics with location, phone number, and sorting options.
+        </p>
+      </div>
+      <div class="topbar-actions">
+        <button id="download-report-btn-doctors" class="btn btn-primary">Download AI Report</button>
+      </div>
+    </header>
+
+    <section class="card glass">
+      <div class="section-header">
+        <div>
+          <h2 class="card-title">Hospital Finder</h2>
+          <p class="card-body-text">Hospitals and clinics sourced from OpenStreetMap.</p>
+        </div>
+        <div class="map-controls">
+          <select id="specialist-filter" disabled>
+            <option value="all" selected>All Hospitals</option>
+          </select>
+          <select id="sort-select-doctors">
+            <option value="nearest">Sort by: Nearest</option>
+            <option value="rating">Sort by: Highest Rated</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div id="map-doctors" class="map-container"></div>
+        <div class="map-side-panel">
+          <ul id="hospital-list-doctors" class="hospital-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/doctors.js"></script>
+</body>
+</html>

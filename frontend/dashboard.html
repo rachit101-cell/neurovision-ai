@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroVision AI – Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+</head>
+<body class="app-body">
+  <div class="background-glow"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">NV</div>
+      <div class="logo-text">
+        <span class="logo-title">NeuroVision AI</span>
+        <span class="logo-subtitle">Clinical Intelligence</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item active">
+        <span class="nav-dot"></span>
+        Dashboard
+      </a>
+      <a href="upload.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Upload Scan
+      </a>
+      <a href="#predictions" class="nav-item">
+        <span class="nav-dot"></span>
+        Predictions
+      </a>
+      <a href="doctors.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Hospitals
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <p class="sidebar-caption">Not for primary diagnosis. For clinical decision support only.</p>
+    </div>
+  </aside>
+
+  <main class="main-layout">
+    <header class="topbar">
+      <div>
+        <h1 class="page-title">Clinical Dashboard</h1>
+        <p class="page-subtitle">Upload a scan, run an AI model, and review results with explainability in one view.</p>
+      </div>
+      <div class="topbar-actions">
+        <a href="upload.html" class="btn btn-primary">Upload Scan</a>
+        <a href="doctors.html" class="btn btn-ghost">View Hospitals</a>
+      </div>
+    </header>
+
+    <section class="grid grid-2 scan-layout" id="predictions">
+      <div class="card glass scan-viewer-card">
+        <div class="section-header">
+          <h2 class="card-title">Scan Viewer</h2>
+          <p class="card-body-text">CT / X‑ray preview for pulmonary and thoracic analysis.</p>
+        </div>
+        <div class="image-container scan-viewer">
+          <img id="scan-preview" src="data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
+          <img id="scan-heatmap" src="data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
+          <div id="scan-placeholder" class="scan-placeholder">
+            <p>No scan loaded. Upload a scan from the Upload page or drag and drop below.</p>
+          </div>
+        </div>
+        <div class="upload-inline">
+          <label class="file-input-label">
+            <input type="file" id="file-input-dashboard" accept="image/*" />
+            <span>Drop or click to add image</span>
+          </label>
+          <div class="model-select">
+            <label for="model-select-dashboard">Model</label>
+            <select id="model-select-dashboard">
+
+              <option value="pneumonia">Pneumonia</option>
+              <option value="lung">Lung Cancer</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="analyze-btn-dashboard">Analyze</button>
+        </div>
+        <div id="scan-status" class="status-line"></div>
+      </div>
+
+      <div class="card glass diagnosis-panel">
+        <div class="section-header">
+          <h2 class="card-title">AI Diagnosis Panel</h2>
+          <p class="card-body-text">Prediction, confidence, and recommended specialist routing.</p>
+        </div>
+        <div class="diagnosis-content">
+          <div class="diagnosis-row">
+            <span class="diagnosis-label">Disease</span>
+            <span class="diagnosis-value" id="disease-label">–</span>
+          </div>
+          <div class="diagnosis-row">
+            <span class="diagnosis-label">Confidence</span>
+            <span class="diagnosis-value" id="confidence-label">–</span>
+          </div>
+          <div class="progress-bar">
+            <div id="confidence-bar" class="progress-bar-fill"></div>
+          </div>
+          <div class="diagnosis-row">
+            <span class="diagnosis-label">Recommended specialist</span>
+            <span class="diagnosis-value" id="specialist-label">–</span>
+          </div>
+          <div class="diagnosis-row">
+            <span class="diagnosis-label">Triage summary</span>
+            <span class="diagnosis-badge" id="triage-badge">Awaiting scan</span>
+          </div>
+        </div>
+        <div class="diagnosis-actions">
+          <a href="doctors.html" class="btn btn-primary">Locate Hospital</a>
+          <button id="download-report-btn" class="btn btn-outline">Download Report (PDF)</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="card glass map-section">
+      <div class="section-header">
+        <div>
+          <h2 class="card-title">Nearby Hospitals & Clinics</h2>
+          <p class="card-body-text">Automatic geolocation with hospital and clinic discovery via OpenStreetMap.</p>
+        </div>
+        <div class="map-controls">
+          <select id="sort-select">
+            <option value="nearest">Sort by: Nearest</option>
+            <option value="rating">Sort by: Highest Rated</option>
+          </select>
+          <button id="refresh-map-btn" class="btn btn-ghost">Refresh Map</button>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div id="map-dashboard" class="map-container"></div>
+        <div class="map-side-panel">
+          <ul id="hospital-list-dashboard" class="hospital-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

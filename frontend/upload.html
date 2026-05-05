@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroVision AI – Upload Scan</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="app-body">
+  <div class="background-glow"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">NV</div>
+      <div class="logo-text">
+        <span class="logo-title">NeuroVision AI</span>
+        <span class="logo-subtitle">Clinical Intelligence</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Dashboard
+      </a>
+      <a href="upload.html" class="nav-item active">
+        <span class="nav-dot"></span>
+        Upload Scan
+      </a>
+      <a href="dashboard.html#predictions" class="nav-item">
+        <span class="nav-dot"></span>
+        Predictions
+      </a>
+      <a href="doctors.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Hospitals
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <p class="sidebar-caption">Upload anonymized clinical images only. Do not include PHI.</p>
+    </div>
+  </aside>
+
+  <main class="main-layout">
+    <header class="topbar">
+      <div>
+        <h1 class="page-title">Upload Study</h1>
+        <p class="page-subtitle">Select the modality and model, then upload a single representative image for analysis.</p>
+      </div>
+    </header>
+
+    <section class="grid grid-2">
+      <div class="card glass">
+        <h2 class="card-title">Scan Details</h2>
+        <div class="form-group">
+          <label for="model-select-upload">Select AI model</label>
+          <select id="model-select-upload">
+
+            <option value="pneumonia">Pneumonia</option>
+            <option value="lung">Lung Cancer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Upload image</label>
+          <label class="file-input-label large">
+            <input type="file" id="file-input-upload" accept="image/*" />
+            <span>Drop CT / X‑ray image here or click to browse</span>
+          </label>
+        </div>
+        <button class="btn btn-primary" id="analyze-btn-upload">Analyze Scan</button>
+        <p id="upload-status" class="status-line"></p>
+      </div>
+
+      <div class="card glass">
+        <h2 class="card-title">Quick Preview</h2>
+        <div class="image-container scan-viewer">
+          <img id="upload-preview" src="data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
+          <img id="upload-heatmap" src="data:image/gif;base64,R0lGOODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
+          <div id="upload-placeholder" class="scan-placeholder">
+            <p>Your preview and any Grad‑CAM results will appear here.</p>
+          </div>
+        </div>
+        <div class="upload-info">
+          <p class="info-line"><strong>Note:</strong> For full diagnostic context, open the scan in the main Dashboard after upload.</p>
+          <a href="dashboard.html" class="btn btn-outline">Go to Dashboard Viewer</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroVision AI – Clinical Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+</head>
+<body class="app-body">
+  <div class="background-glow"></div>
+
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">NV</div>
+      <div class="logo-text">
+        <span class="logo-title">NeuroVision AI</span>
+        <span class="logo-subtitle">Clinical Intelligence</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item active">
+        <span class="nav-dot"></span>
+        Dashboard
+      </a>
+      <a href="upload.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Upload Scan
+      </a>
+      <a href="dashboard.html#predictions" class="nav-item">
+        <span class="nav-dot"></span>
+        Predictions
+      </a>
+      <a href="doctors.html" class="nav-item">
+        <span class="nav-dot"></span>
+        Hospitals
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <p class="sidebar-caption">For clinical decision support only. Not a substitute for a licensed physician.</p>
+    </div>
+  </aside>
+
+  <main class="main-layout">
+    <header class="topbar">
+      <div>
+        <h1 class="page-title">AI Radiology Platform</h1>
+        <p class="page-subtitle">Unified pneumonia and lung cancer triage in a single interface.</p>
+      </div>
+      <div class="topbar-actions">
+        <a href="upload.html" class="btn btn-primary">New Scan</a>
+        <a href="doctors.html" class="btn btn-ghost">Find Hospitals</a>
+      </div>
+    </header>
+
+    <section class="grid grid-2 main-hero">
+      <div class="card hero-card glass">
+        <h2 class="card-title">Realtime AI-Assisted Triage</h2>
+        <p class="card-body-text">
+          Upload CT or X-ray studies, select the appropriate AI model, and receive explainable predictions with
+          calibrated confidence scores for thoracic findings.
+        </p>
+        <ul class="hero-list">
+
+          <li><span class="pill pill-info"></span> Pneumonia & lung cancer probability estimates</li>
+          <li><span class="pill pill-warning"></span> Location‑aware specialist and hospital routing</li>
+        </ul>
+        <div class="hero-cta-row">
+          <a href="upload.html" class="btn btn-primary">Start a New Study</a>
+          <a href="dashboard.html" class="btn btn-outline">Open Clinical Dashboard</a>
+        </div>
+      </div>
+
+      <div class="card hero-viz glass">
+        <div class="hero-viz-header">
+          <span class="hero-label">Live Preview</span>
+          <span class="hero-status-dot"></span>
+          <span class="hero-status-text">System Online</span>
+        </div>
+        <div class="image-container viewer-placeholder">
+
+          <div class="scan-overlay-label">Lung AI (Demo)</div>
+        </div>
+        <div class="mini-metrics-row">
+          <div class="mini-metric">
+            <span class="mini-label">Avg. Processing</span>
+            <span class="mini-value">2.4 s</span>
+          </div>
+          <div class="mini-metric">
+            <span class="mini-label">Supported Modalities</span>
+            <span class="mini-value">CT · X‑ray</span>
+          </div>
+          <div class="mini-metric">
+            <span class="mini-label">Models</span>
+            <span class="mini-value">2</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid grid-2 dashboard-glance">
+      <div class="card glass stat-card">
+        <h3 class="card-title">Pneumonia</h3>
+        <p class="card-body-text">Chest X‑ray classifier tuned for ED triage and inpatient monitoring.</p>
+        <div class="stat-row">
+          <span>Last case</span>
+          <span class="stat-value">Normal · 88%</span>
+        </div>
+      </div>
+      <div class="card glass stat-card">
+        <h3 class="card-title">Lung Cancer</h3>
+        <p class="card-body-text">Three‑class CT model for benign, malignant, and normal lung findings.</p>
+        <div class="stat-row">
+          <span>Last case</span>
+          <span class="stat-value">Benign · 81%</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card glass map-preview-section">
+      <div class="section-header">
+        <div>
+          <h2 class="card-title">Care Network Overview</h2>
+          <p class="card-body-text">Discover nearby hospitals, clinics, and specialists within your city.</p>
+        </div>
+        <a href="doctors.html" class="btn btn-outline">Open Hospitals View</a>
+      </div>
+      <div class="grid grid-2">
+        <div id="map-preview" class="map-container small-map"></div>
+        <div class="map-side-panel">
+          <ul class="hospital-list" id="map-preview-list"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="js/map.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
